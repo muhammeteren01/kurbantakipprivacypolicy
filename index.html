@@ -41,22 +41,28 @@
             color: #888;
             margin-top: 8px;
         }
-        h2 {
-            font-size: 20px;
+        .lang-switch {
+            margin-top: 16px;
+        }
+        .lang-btn {
+            background: none;
+            border: 2px solid #2e7d32;
+            padding: 6px 16px;
+            margin: 0 4px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
             color: #2e7d32;
-            margin-top: 32px;
-            margin-bottom: 12px;
+            font-weight: 500;
+            transition: all 0.3s;
         }
-        p {
-            margin-bottom: 16px;
-            text-align: justify;
+        .lang-btn.active {
+            background-color: #2e7d32;
+            color: #fff;
         }
-        ul {
-            margin-bottom: 16px;
-            padding-left: 24px;
-        }
-        li {
-            margin-bottom: 8px;
+        .lang-btn:hover {
+            background-color: #2e7d32;
+            color: #fff;
         }
         .highlight {
             background-color: #e8f5e9;
@@ -64,6 +70,69 @@
             border-radius: 8px;
             border-left: 4px solid #2e7d32;
             margin: 20px 0;
+        }
+        .accordion-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .accordion-header {
+            width: 100%;
+            background: #fff;
+            border: none;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2e7d32;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+        .accordion-header:hover {
+            background-color: #f1f8e9;
+        }
+        .accordion-header .arrow {
+            font-size: 14px;
+            transition: transform 0.3s;
+            color: #2e7d32;
+        }
+        .accordion-item.open .accordion-header .arrow {
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .accordion-body {
+            padding: 0 20px 16px 20px;
+        }
+        .accordion-body p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        .accordion-body ul {
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+        .accordion-body li {
+            margin-bottom: 6px;
+        }
+        .no-data-list li {
+            position: relative;
+            list-style: none;
+            padding-left: 8px;
+        }
+        .no-data-list li::before {
+            content: "✗";
+            color: #c62828;
+            font-weight: bold;
+            margin-right: 8px;
         }
         footer {
             text-align: center;
@@ -78,73 +147,161 @@
 <body>
     <div class="container">
         <header>
-            <h1>Gizlilik Politikası</h1>
+            <h1 id="title">Gizlilik Politikası</h1>
             <div class="app-name">Kurban Takip Otomasyonu</div>
-            <div class="update-date">Son güncelleme: 11 Şubat 2026</div>
+            <div class="update-date" id="updateDate">Son güncelleme: 11 Şubat 2026</div>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="switchLang('tr')">Türkçe</button>
+                <button class="lang-btn" onclick="switchLang('en')">English</button>
+            </div>
         </header>
 
-        <div class="highlight">
+        <div class="highlight" id="highlightText">
             <strong>Kurban Takip Otomasyonu</strong>, işletmeler arası (B2B) kullanım için geliştirilmiş bir otomasyon uygulamasıdır. Uygulamamız kullanıcılardan kişisel veri toplamamaktadır.
         </div>
 
-        <h2>1. Genel Bakış</h2>
-        <p>
-            Kurban Takip Otomasyonu ("Uygulama"), kurban kesim süreçlerinin takibi ve yönetimi amacıyla geliştirilmiş bir B2B otomasyon çözümüdür. Bu gizlilik politikası, uygulamamızın veri uygulamalarını açıklamaktadır.
-        </p>
-        <p>
-            Uygulama, Android (Google Play) ve iOS (App Store) platformlarında yayınlanmaktadır.
-        </p>
+        <div id="accordionContainer"></div>
 
-        <h2>2. Veri Toplama</h2>
-        <p>
-            Kurban Takip Otomasyonu, kullanıcılarından herhangi bir kişisel veri toplamamaktadır. Uygulama, belirli şirketler tarafından dahili iş süreçleri kapsamında kullanılmak üzere tasarlanmıştır.
-        </p>
-        <p>Uygulamamız aşağıdaki verileri <strong>toplamamaktadır</strong>:</p>
-        <ul>
-            <li>Kişisel kimlik bilgileri (ad, soyad, e-posta vb.)</li>
-            <li>Konum verileri</li>
-            <li>Cihaz bilgileri</li>
-            <li>Kullanım istatistikleri</li>
-            <li>Çerezler veya izleme teknolojileri</li>
-        </ul>
-
-        <h2>3. Veri Paylaşımı</h2>
-        <p>
-            Kişisel veri toplanmadığından, üçüncü taraflarla herhangi bir kişisel veri paylaşımı yapılmamaktadır.
-        </p>
-
-        <h2>4. Üçüncü Taraf Hizmetleri</h2>
-        <p>
-            Uygulama, kullanıcı verilerini toplayan veya işleyen üçüncü taraf analitik, reklam veya izleme hizmetleri kullanmamaktadır.
-        </p>
-
-        <h2>5. Veri Güvenliği</h2>
-        <p>
-            Uygulama kapsamında işlenen tüm iş verileri, yetkili şirket kullanıcıları tarafından erişilebilir olup endüstri standartlarına uygun güvenlik önlemleriyle korunmaktadır.
-        </p>
-
-        <h2>6. Çocukların Gizliliği</h2>
-        <p>
-            Uygulamamız B2B amaçlı olup 13 yaşın altındaki çocuklara yönelik değildir. Çocuklardan bilerek herhangi bir veri toplanmamaktadır.
-        </p>
-
-        <h2>7. Gizlilik Politikası Değişiklikleri</h2>
-        <p>
-            Bu gizlilik politikası zaman zaman güncellenebilir. Değişiklikler bu sayfada yayınlanacak ve "Son güncelleme" tarihi buna göre revize edilecektir. Kullanıcıların bu sayfayı düzenli olarak kontrol etmeleri önerilir.
-        </p>
-
-        <h2>8. İletişim</h2>
-        <p>
-            Bu gizlilik politikası hakkında herhangi bir sorunuz varsa bizimle iletişime geçebilirsiniz:
-        </p>
-        <ul>
-            <li><strong>Uygulama:</strong> Kurban Takip Otomasyonu</li>
-            <li><strong>Tür:</strong> B2B Otomasyon Uygulaması</li>
-        </ul>
-
-        <footer>
+        <footer id="footerText">
             &copy; 2026 Kurban Takip Otomasyonu. Tüm hakları saklıdır.
         </footer>
     </div>
+
+    <script>
+        const content = {
+            tr: {
+                title: "Gizlilik Politikası",
+                updateDate: "Son güncelleme: 11 Şubat 2026",
+                highlight: '<strong>Kurban Takip Otomasyonu</strong>, işletmeler arası (B2B) kullanım için geliştirilmiş bir otomasyon uygulamasıdır. Uygulamamız kullanıcılardan kişisel veri toplamamaktadır.',
+                footer: "&copy; 2026 Kurban Takip Otomasyonu. Tüm hakları saklıdır.",
+                sections: [
+                    {
+                        title: "1. Genel Bakış",
+                        body: '<p>Kurban Takip Otomasyonu ("Uygulama"), kurban kesim süreçlerinin takibi ve yönetimi amacıyla geliştirilmiş bir B2B otomasyon çözümüdür. Bu gizlilik politikası, uygulamamızın veri uygulamalarını açıklamaktadır.</p><p>Uygulama, Android (Google Play) ve iOS (App Store) platformlarında yayınlanmaktadır.</p>'
+                    },
+                    {
+                        title: "2. Veri Toplama",
+                        body: '<p>Kurban Takip Otomasyonu, kullanıcılarından <strong>herhangi bir kişisel veri toplamamaktadır</strong>. Uygulama, belirli şirketler tarafından dahili iş süreçleri kapsamında kullanılmak üzere tasarlanmıştır.</p><p>Uygulamamız aşağıdaki verilerin <strong>hiçbirini toplamamaktadır</strong>:</p><ul class="no-data-list"><li>Kişisel kimlik bilgileri (ad, soyad, e-posta vb.)</li><li>Konum verileri</li><li>Cihaz bilgileri</li><li>Kullanım istatistikleri</li><li>Çerezler veya izleme teknolojileri</li></ul>'
+                    },
+                    {
+                        title: "3. Veri Paylaşımı",
+                        body: '<p>Kişisel veri toplanmadığından, üçüncü taraflarla herhangi bir kişisel veri paylaşımı yapılmamaktadır.</p>'
+                    },
+                    {
+                        title: "4. Üçüncü Taraf Hizmetleri",
+                        body: '<p>Uygulama, kullanıcı verilerini toplayan veya işleyen üçüncü taraf analitik, reklam veya izleme hizmetleri kullanmamaktadır.</p>'
+                    },
+                    {
+                        title: "5. Veri Güvenliği",
+                        body: '<p>Uygulama kapsamında işlenen tüm iş verileri, yetkili şirket kullanıcıları tarafından erişilebilir olup endüstri standartlarına uygun güvenlik önlemleriyle korunmaktadır.</p>'
+                    },
+                    {
+                        title: "6. Çocukların Gizliliği",
+                        body: '<p>Uygulamamız B2B amaçlı olup 13 yaşın altındaki çocuklara yönelik değildir. Çocuklardan bilerek herhangi bir veri toplanmamaktadır.</p>'
+                    },
+                    {
+                        title: "7. Gizlilik Politikası Değişiklikleri",
+                        body: '<p>Bu gizlilik politikası zaman zaman güncellenebilir. Değişiklikler bu sayfada yayınlanacak ve "Son güncelleme" tarihi buna göre revize edilecektir. Kullanıcıların bu sayfayı düzenli olarak kontrol etmeleri önerilir.</p>'
+                    },
+                    {
+                        title: "8. İletişim",
+                        body: '<p>Bu gizlilik politikası hakkında herhangi bir sorunuz varsa bizimle iletişime geçebilirsiniz:</p><ul><li><strong>Uygulama:</strong> Kurban Takip Otomasyonu</li><li><strong>Tür:</strong> B2B Otomasyon Uygulaması</li></ul>'
+                    }
+                ]
+            },
+            en: {
+                title: "Privacy Policy",
+                updateDate: "Last updated: February 11, 2026",
+                highlight: '<strong>Kurban Takip Otomasyonu</strong> (Qurban Tracking Automation) is an automation application developed for business-to-business (B2B) use. Our application does not collect any personal data from users.',
+                footer: "&copy; 2026 Kurban Takip Otomasyonu. All rights reserved.",
+                sections: [
+                    {
+                        title: "1. Overview",
+                        body: '<p>Kurban Takip Otomasyonu ("Application") is a B2B automation solution developed for tracking and managing qurban (sacrifice) processes. This privacy policy explains the data practices of our application.</p><p>The application is published on Android (Google Play) and iOS (App Store) platforms.</p>'
+                    },
+                    {
+                        title: "2. Data Collection",
+                        body: '<p>Kurban Takip Otomasyonu <strong>does not collect any personal data</strong> from its users. The application is designed to be used by specific companies within their internal business processes.</p><p>Our application does <strong>not collect any</strong> of the following data:</p><ul class="no-data-list"><li>Personal identification information (name, surname, email, etc.)</li><li>Location data</li><li>Device information</li><li>Usage statistics</li><li>Cookies or tracking technologies</li></ul>'
+                    },
+                    {
+                        title: "3. Data Sharing",
+                        body: '<p>Since no personal data is collected, no personal data is shared with third parties.</p>'
+                    },
+                    {
+                        title: "4. Third-Party Services",
+                        body: '<p>The application does not use any third-party analytics, advertising, or tracking services that collect or process user data.</p>'
+                    },
+                    {
+                        title: "5. Data Security",
+                        body: '<p>All business data processed within the application is accessible by authorized company users and is protected with industry-standard security measures.</p>'
+                    },
+                    {
+                        title: "6. Children\'s Privacy",
+                        body: '<p>Our application is intended for B2B purposes and is not directed at children under the age of 13. No data is knowingly collected from children.</p>'
+                    },
+                    {
+                        title: "7. Changes to Privacy Policy",
+                        body: '<p>This privacy policy may be updated from time to time. Changes will be published on this page and the "Last updated" date will be revised accordingly. Users are encouraged to review this page regularly.</p>'
+                    },
+                    {
+                        title: "8. Contact",
+                        body: '<p>If you have any questions about this privacy policy, you can contact us:</p><ul><li><strong>Application:</strong> Kurban Takip Otomasyonu</li><li><strong>Type:</strong> B2B Automation Application</li></ul>'
+                    }
+                ]
+            }
+        };
+
+        let currentLang = 'tr';
+
+        function switchLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.lang-btn[onclick="switchLang(\'' + lang + '\')"]').classList.add('active');
+            document.documentElement.lang = lang;
+            renderContent();
+        }
+
+        function toggleAccordion(index) {
+            const items = document.querySelectorAll('.accordion-item');
+            const item = items[index];
+            const contentEl = item.querySelector('.accordion-content');
+
+            if (item.classList.contains('open')) {
+                contentEl.style.maxHeight = '0';
+                item.classList.remove('open');
+            } else {
+                contentEl.style.maxHeight = contentEl.scrollHeight + 'px';
+                item.classList.add('open');
+            }
+        }
+
+        function renderContent() {
+            const data = content[currentLang];
+            document.getElementById('title').textContent = data.title;
+            document.getElementById('updateDate').textContent = data.updateDate;
+            document.getElementById('highlightText').innerHTML = data.highlight;
+            document.getElementById('footerText').innerHTML = data.footer;
+
+            const container = document.getElementById('accordionContainer');
+            container.innerHTML = '';
+
+            data.sections.forEach((section, i) => {
+                const item = document.createElement('div');
+                item.className = 'accordion-item';
+                item.innerHTML = `
+                    <button class="accordion-header" onclick="toggleAccordion(${i})">
+                        <span>${section.title}</span>
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body">${section.body}</div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        renderContent();
+    </script>
 </body>
 </html>
